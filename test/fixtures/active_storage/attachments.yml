@@ -1,0 +1,13 @@
+# https://guides.rubyonrails.org/testing.html#file-attachment-fixtures
+pickaxe_image_attachment:
+  name: image
+  record: pickaxe (Product)
+  blob: pickaxe_image_blob
+rails_scales_image_attachment:
+  name: image
+  record: rails_scales (Product)
+  blob: rails_scales_image_blob
+front_end_image_attachment:
+  name: image
+  record: front_end (Product)
+  blob: front_end_image_blob

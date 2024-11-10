@@ -1,0 +1,5 @@
+# https://guides.rubyonrails.org/testing.html#file-attachment-fixtures
+# relative path from test/fixtures/files
+pickaxe_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "ruby5.jpg" %>
+rails_scales_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "cprpo.jpg" %>
+front_end_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "nrclient2.jpg" %>
