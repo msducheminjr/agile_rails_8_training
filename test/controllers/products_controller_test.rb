@@ -16,8 +16,18 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create product" do
+    image_file = fixture_file_upload(
+      Rails.root.join("test", "fixtures", "files", "stateless_logo_256.png"),
+      "image/png"
+      )
     assert_difference("Product.count") do
-      post products_url, params: { product: { description: @product.description, price: @product.price, title: @product.title } }
+      post products_url, params: {
+        product: {
+          description: @product.description, price: @product.price,
+          title: "Hack the Stateless Code",
+          image: image_file
+        }
+      }
     end
 
     assert_redirected_to product_url(Product.last)
