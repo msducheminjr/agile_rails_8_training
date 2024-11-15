@@ -19,6 +19,7 @@ class ProductTest < ActiveSupport::TestCase
     assert product.invalid?
     assert product.errors[:title].any?
     assert product.errors[:description].any?
+    assert_equal [ "gotta be there" ], product.errors[:description]
     assert product.errors[:price].any?
     assert product.errors[:image].any?
   end
@@ -63,5 +64,12 @@ class ProductTest < ActiveSupport::TestCase
     assert @product_with_image.invalid?
     assert_equal [ I18n.translate("errors.messages.taken") ],
             @product_with_image.errors[:title]
+  end
+
+  test "title must be 10 characters" do
+    @product.title = "Short"
+    assert @product.invalid?
+    assert_equal [ "is too short (minimum is 10 characters)" ],
+            @product.errors[:title]
   end
 end
