@@ -3,6 +3,8 @@ require "test_helper"
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:pickaxe)
+    @title = "Stateless Coding"
+    @image_file = fixture_file_upload("stateless_logo_256.png", "image/png")
   end
 
   test "should get index" do
@@ -16,16 +18,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create product" do
-    image_file = fixture_file_upload(
-      Rails.root.join("test", "fixtures", "files", "stateless_logo_256.png"),
-      "image/png"
-      )
     assert_difference("Product.count") do
       post products_url, params: {
         product: {
           description: @product.description, price: @product.price,
-          title: "Hack the Stateless Code",
-          image: image_file
+          title: @title,
+          image: @image_file
         }
       }
     end
@@ -44,7 +42,14 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { description: @product.description, price: @product.price, title: @product.title } }
+    patch product_url(@product), params: {
+      product: {
+        description: @product.description,
+        price: @product.price,
+        title: @title,
+        image: @image_file
+      }
+    }
     assert_redirected_to product_url(@product)
   end
 

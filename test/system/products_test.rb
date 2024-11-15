@@ -17,7 +17,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Description", with: "Hack the Stateless Code"
     fill_in "Price", with: 23.95
     fill_in "Title", with: "Stateless Coding"
-    attach_file("Image", Rails.root.join("test", "fixtures", "files", "stateless_logo_256.png"))
+    attach_file "Image", "test/fixtures/files/stateless_logo_256.png"
     click_on "Create Product"
 
     assert_text "Product was successfully created"
