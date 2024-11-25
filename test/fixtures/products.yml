@@ -48,3 +48,8 @@ front_end:
     your toolkit today!
     </p>
   price: 28.95
+
+pragprog:
+  title: The Pragmatic Programmer
+  description: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)
+  price: 39.99

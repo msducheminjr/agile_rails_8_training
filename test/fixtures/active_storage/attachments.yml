@@ -11,3 +11,7 @@ front_end_image_attachment:
   name: image
   record: front_end (Product)
   blob: front_end_image_blob
+pragprog_image_attachment:
+  name: image
+  record: pragprog (Product)
+  blob: pragprog_image_blob

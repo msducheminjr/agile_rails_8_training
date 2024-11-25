@@ -3,3 +3,4 @@
 pickaxe_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "ruby5.jpg" %>
 rails_scales_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "cprpo.jpg" %>
 front_end_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "nrclient2.jpg" %>
+pragprog_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "lorem.jpg" %>
