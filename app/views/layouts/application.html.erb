@@ -30,13 +30,18 @@
     </header>
 
     <section class="flex">
-      <nav class="bg-green-900 p-6">
+      <nav class="bg-green-900 p-6 relative">
         <ul class="text-gray-300 leading-8">
           <li><a href="/">Home</a></li>
           <li><a href="/questions">Questions</a></li>
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
+        <div class="ml-3 mb-1 absolute bottom-0 left-0">
+          <p class="text-gray-300 text-xs font-serif">
+            <%= Time.current.strftime("%b %-d, %Y %H:%M:%S %Z") %>
+          </p>
+        </div>
       </nav>
       <main class="container mx-auto mt-4 px-5 flex">
         <%= yield %>
