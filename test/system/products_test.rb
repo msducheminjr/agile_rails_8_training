@@ -38,7 +38,7 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Product" do
-    visit product_url(@product)
+    visit product_url(products(:rails_scales))
     click_on "Destroy this product", match: :first
 
     assert_text "Product was successfully destroyed"

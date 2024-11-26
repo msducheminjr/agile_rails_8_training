@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class CartsTest < ApplicationSystemTestCase
   setup do
-    @cart = carts(:one)
+    @cart = carts(:sams)
   end
 
   test "visiting the index" do

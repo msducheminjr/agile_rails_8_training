@@ -64,4 +64,10 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal [ I18n.translate("errors.messages.taken") ],
             @product_with_image.errors[:title]
   end
+
+  test "should fail to destroy product if line items present" do
+    assert_not @product.destroy, "Expected product not to destroy"
+
+    assert_equal [ "Line Items present" ], @product.errors[:base]
+  end
 end

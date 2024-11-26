@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sams_pickaxe:
+  product: pickaxe
+  cart: sams
+
+sams_pragprog:
+  product: pragprog
+  cart: sams
+
+daves_pragprog:
+  product: pragprog
+  cart: daves
+
+daves_front_end:
+  product: front_end
+  cart: daves
