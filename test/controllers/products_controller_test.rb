@@ -78,7 +78,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to products_url
   end
 
-    private
+  private
     def form_assertions!
       assert_select "form div label", "Title"
       assert_select "form div label", "Description"
