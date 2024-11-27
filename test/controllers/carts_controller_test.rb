@@ -28,6 +28,11 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should redirect to catalog if invalid cart" do
+    get cart_url("notarealid")
+    assert_redirected_to store_index_url, notice: "Invalid cart"
+  end
+
   test "should get edit" do
     get edit_cart_url(@cart)
     assert_response :success
