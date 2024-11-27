@@ -28,7 +28,16 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "h2", "Your Pragmatic Cart"
-    assert_select "li", "The Pragmatic Programmer"
+    assert_select "li", "1 \u00D7 The Pragmatic Programmer"
+    assert_no_difference("Cart.count") do
+      assert_no_difference("LineItem.count") do
+        post line_items_url, params: { product_id: products(:pragprog).id }
+      end
+    end
+    follow_redirect!
+
+    assert_select "h2", "Your Pragmatic Cart"
+    assert_select "li", "2 \u00D7 The Pragmatic Programmer"
   end
 
   test "should show line_item" do
