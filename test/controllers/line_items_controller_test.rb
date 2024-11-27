@@ -16,6 +16,11 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create line_item" do
+    10.times do
+      get store_index_url
+    end
+
+    assert_select "p", "You have visited this page 10 times."
     # no existing cart in session, so will also create cart
     assert_difference("Cart.count") do
       assert_difference("LineItem.count") do
@@ -29,6 +34,9 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h2", "Your Pragmatic Cart"
     assert_select "li", "The Pragmatic Programmer"
+
+    get store_index_url
+    assert_select "p", "You have visited this page 1 time."
   end
 
   test "should show line_item" do
