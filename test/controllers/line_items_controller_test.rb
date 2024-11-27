@@ -36,7 +36,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", "The Pragmatic Programmer"
 
     get store_index_url
-    assert_select "p", "You have visited this page 1 time."
+    assert_no_match "You have visited this page", response.body
   end
 
   test "should show line_item" do
