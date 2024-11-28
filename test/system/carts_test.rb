@@ -31,9 +31,11 @@ class CartsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Cart" do
-    visit cart_url(@cart)
-    click_on "Destroy this cart", match: :first
+    visit "/"
+    click_on "Add to Cart", match: :first
 
-    assert_text "Cart was successfully destroyed"
+    click_on "Empty Cart"
+
+    assert_text "Your cart is currently empty"
   end
 end

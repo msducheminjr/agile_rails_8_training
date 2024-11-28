@@ -44,10 +44,20 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy cart" do
+    post line_items_url, params: { product_id: products(:pragprog).id }
+    @cart = Cart.find(session[:cart_id])
     assert_difference("Cart.count", -1) do
       delete cart_url(@cart)
     end
 
-    assert_redirected_to carts_url
+    assert_redirected_to store_index_url, notice: "Your cart is currently empty"
+  end
+
+  test "should fail to destroy another user's cart" do
+    assert_no_difference("Cart.count") do
+      delete cart_url(@cart)
+    end
+
+    assert_redirected_to store_index_url, notice: "Invalid cart"
   end
 end

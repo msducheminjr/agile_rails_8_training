@@ -25,4 +25,10 @@ class CartTest < ActiveSupport::TestCase
     assert_equal 2, line_item.quantity
     assert_equal line_items(:sams_pickaxe).id, line_item.id
   end
+
+  test "total_price returns expected amount" do
+    assert_equal 0, Cart.new.total_price
+    assert_equal 73.94, carts(:sams).total_price
+    assert_equal 126.84, carts(:daves).total_price
+  end
 end

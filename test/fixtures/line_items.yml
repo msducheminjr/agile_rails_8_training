@@ -3,15 +3,19 @@
 sams_pickaxe:
   product: pickaxe
   cart: sams
+  quantity: 1
 
 sams_pragprog:
   product: pragprog
   cart: sams
+  quantity: 1
 
 daves_pragprog:
   product: pragprog
   cart: daves
+  quantity: 1
 
 daves_front_end:
   product: front_end
   cart: daves
+  quantity: 3
