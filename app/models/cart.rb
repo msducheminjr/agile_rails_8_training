@@ -8,6 +8,7 @@ class Cart < ApplicationRecord
     else
       current_item = line_items.build(product_id: product.id)
     end
+    current_item.subtotal = current_item.total_price
     current_item
   end
 

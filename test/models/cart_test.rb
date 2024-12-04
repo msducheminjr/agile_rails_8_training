@@ -15,6 +15,7 @@ class CartTest < ActiveSupport::TestCase
     assert_equal product.id, line_item.product_id
     assert_equal @cart.id, line_item.cart_id
     assert_equal 1, line_item.quantity
+    assert_equal line_item.total_price, line_item.subtotal
   end
 
   test "increments quantity if line item exist" do
@@ -24,6 +25,7 @@ class CartTest < ActiveSupport::TestCase
     assert_equal @cart.id, line_item.cart_id
     assert_equal 2, line_item.quantity
     assert_equal line_items(:sams_pickaxe).id, line_item.id
+    assert_equal line_item.total_price, line_item.subtotal
   end
 
   test "total_price returns expected amount" do
