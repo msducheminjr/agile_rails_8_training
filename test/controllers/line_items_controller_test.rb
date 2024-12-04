@@ -26,7 +26,6 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to cart_url(LineItem.last.cart_id)
 
     follow_redirect!
-
     assert_select "h2", "Your Cart"
     assert_select "td", "The Pragmatic Programmer"
     assert_select "td", "$39.99"

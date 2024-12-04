@@ -10,24 +10,21 @@ class CartsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Carts"
   end
 
-  test "should create cart" do
+  test "should not allow cart creation via UI" do
     visit carts_url
     click_on "New cart"
 
     click_on "Create Cart"
 
-    assert_text "Cart was successfully created"
-    click_on "Back"
+    assert_text "Invalid cart"
+    assert_selector "h1", text: "Your Pragmatic Catalog"
   end
 
-  test "should update Cart" do
-    visit cart_url(@cart)
-    click_on "Edit this cart", match: :first
+  test "should not allow updating Cart" do
+    visit edit_cart_url(@cart)
 
-    click_on "Update Cart"
-
-    assert_text "Cart was successfully updated"
-    click_on "Back"
+    assert_text "Invalid cart"
+    assert_selector "h1", text: "Your Pragmatic Catalog"
   end
 
   test "should destroy Cart" do

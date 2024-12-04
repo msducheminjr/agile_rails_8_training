@@ -23,8 +23,10 @@ class LineItemsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Line item" do
-    visit line_item_url(@line_item)
-    click_on "Destroy this line item", match: :first
+    visit "/"
+    click_on "Add to Cart", match: :first
+
+    click_on "Remove", match: :first
 
     assert_text "Item was removed from cart"
   end

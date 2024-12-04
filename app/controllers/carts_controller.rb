@@ -1,10 +1,13 @@
 class CartsController < ApplicationController
+  class CartMismatchError < StandardError; end
   before_action :set_cart, only: %i[ show edit update destroy ]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  rescue_from CartMismatchError, with: :invalid_cart
 
   # GET /carts or /carts.json
   def index
-    @carts = Cart.all
+    # only show cart matching session
+    @carts = Cart.where(id: session[:cart_id])
   end
 
   # GET /carts/1 or /carts/1.json
@@ -50,10 +53,6 @@ class CartsController < ApplicationController
 
   # DELETE /carts/1 or /carts/1.json
   def destroy
-    unless @cart.id == session[:cart_id]
-      invalid_cart
-      return
-    end
     @cart.destroy!
     session[:cart_id] = nil
 
@@ -66,7 +65,9 @@ class CartsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = Cart.find(params.expect(:id))
+      cart_id = params.expect(:id)
+      raise CartMismatchError.new("Session cart ID does not match params") if cart_id != session[:cart_id].to_s
+      @cart = Cart.find(cart_id)
     end
 
     # Only allow a list of trusted parameters through.
