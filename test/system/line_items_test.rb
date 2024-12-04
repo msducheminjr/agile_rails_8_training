@@ -26,6 +26,6 @@ class LineItemsTest < ApplicationSystemTestCase
     visit line_item_url(@line_item)
     click_on "Destroy this line item", match: :first
 
-    assert_text "Line item was successfully destroyed"
+    assert_text "Item was removed from cart"
   end
 end
