@@ -66,11 +66,61 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to line_item_url(@line_item)
   end
 
-  test "should destroy line_item" do
-    assert_difference("LineItem.count", -1) do
+  test "should not destroy line_item for another cart" do
+    assert_no_difference("LineItem.count") do
       delete line_item_url(@line_item)
     end
 
-    assert_redirected_to line_items_url
+    assert_redirected_to store_index_url
+    assert_equal "Invalid cart or line item", flash[:notice]
   end
+
+  test "should remove line item if quantity is one and have appropriate message" do
+    add_the_products
+    cart = Cart.last
+    line_item = cart.line_items.find_by(product: products(:pragprog))
+    assert_difference("LineItem.count", -1) do
+      delete line_item_url(line_item)
+    end
+
+    assert_redirected_to store_index_url
+    assert_equal "The Pragmatic Programmer was successfully removed", flash[:notice]
+  end
+
+  test "should decrease line item quantity if greater than one and have appropriate message" do
+    add_the_products
+    cart = Cart.last
+    line_item = cart.line_items.find_by(product: products(:pickaxe))
+    assert_equal 2, line_item.quantity
+    assert_no_difference("LineItem.count") do
+      delete line_item_url(line_item)
+    end
+
+    assert_equal 1, line_item.reload.quantity
+    assert_redirected_to store_index_url
+    assert_equal "Quantity of Programming Ruby 3.3 (5th Edition) was successfully decreased", flash[:notice]
+  end
+
+  test "should decrease line item quantity for last book with appropriate message" do
+    pragprog = products(:pragprog)
+    post line_items_url, params: { product_id: pragprog.id }
+    cart = Cart.last
+    line_item = cart.line_items.find_by(product: pragprog)
+    assert_difference("LineItem.count", -1) do
+      delete line_item_url(line_item)
+    end
+
+    assert_redirected_to store_index_url
+    assert_equal "Your cart is currently empty", flash[:notice]
+  end
+
+  private
+    def add_the_products
+      pragprog = products(:pragprog)
+      pickaxe = products(:pickaxe)
+      post line_items_url, params: { product_id: pragprog.id }
+      2.times do
+        post line_items_url, params: { product_id: pickaxe.id }
+      end
+    end
 end
