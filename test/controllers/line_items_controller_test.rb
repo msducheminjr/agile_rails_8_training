@@ -23,7 +23,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_redirected_to cart_url(LineItem.last.cart_id)
+    assert_redirected_to store_index_url
 
     follow_redirect!
 
