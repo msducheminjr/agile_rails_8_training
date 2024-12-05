@@ -12,7 +12,7 @@ class StoreCatalogTest < ApplicationSystemTestCase
     store_index_assertions!
     click_on "Add to Cart", match: :first
     assert_selector "div h2", text: "Your Cart"
-    assert_selector "div table tr td", text: @first_product.title
+    assert_selector "div table tr.line-item-highlight td", text: @first_product.title
   end
 
   private
