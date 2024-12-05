@@ -6,13 +6,20 @@ class StoreCatalogTest < ApplicationSystemTestCase
     store_index_assertions!
   end
 
-  test "adding first item to cart" do
+  test "adding first item to cart and emptying" do
     @first_product = Product.order(:title).first
     visit "/"
     store_index_assertions!
     click_on "Add to Cart", match: :first
     assert_selector "div h2", text: "Your Cart"
     assert_selector "div table tr.line-item-highlight td", text: @first_product.title
+
+    # now empty the cart
+    page.accept_confirm do
+      click_on "Empty Cart"
+    end
+
+    assert_text "Your cart is currently empty"
   end
 
   private

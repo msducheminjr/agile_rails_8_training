@@ -10,6 +10,7 @@
       </tr>
     </tfoot>
   </table>
-  <%= button_to 'Empty Cart', cart, method: :delete,
+  <%= link_to 'Empty Cart', cart,
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
       class: 'ml-4 rounded-lg py-1 px-2 text-white bg-green-600' %>
 </div>

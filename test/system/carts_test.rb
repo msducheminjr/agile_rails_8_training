@@ -33,8 +33,9 @@ class CartsTest < ApplicationSystemTestCase
   test "should destroy Cart" do
     visit "/"
     click_on "Add to Cart", match: :first
-
-    click_on "Empty Cart"
+    page.accept_confirm do
+      click_on "Empty Cart"
+    end
 
     assert_text "Your cart is currently empty"
   end
