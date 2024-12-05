@@ -8,6 +8,7 @@
   <td>&times;</td>
   <td class="pr-2"><%= line_item.product.title %></td>
   <td class="text-right font-bold"><%= number_to_currency(line_item.total_price) %></td>
-  <td><%= button_to destroy_label, line_item, method: :delete,
+  <td><%= link_to destroy_label, line_item,
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
       class: 'ml-4 rounded-lg py-1 px-2 border border-gray-400 text-gray-600 bg-gray-200 text-xs' %></td>
 </tr>

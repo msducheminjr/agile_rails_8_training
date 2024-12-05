@@ -69,6 +69,7 @@ class LineItemsController < ApplicationController
       notice_text = "#{title} was successfully removed"
     end
     respond_to do |format|
+      format.turbo_stream { @notice = notice_text }
       format.html { redirect_to store_index_url, status: :see_other, notice: notice_text }
       format.json { head :no_content }
     end
