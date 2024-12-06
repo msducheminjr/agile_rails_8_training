@@ -1,0 +1,12 @@
+@keyframes product-highlight {
+  0% {
+    background: #FF8;
+  }
+  100% {
+    background: none;
+  }
+}
+
+.product-highlight {
+  animation: product-highlight 2s;
+}

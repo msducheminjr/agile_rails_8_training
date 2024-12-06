@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
@@ -40,7 +41,9 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to @product, notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
-        @product.broadcast_replace_later_to "products", partial: "store/product"
+        @product.broadcast_replace_later_to "products",
+          partial: "store/product", target: dom_id(@product),
+          locals: { product: @product, current_product: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }

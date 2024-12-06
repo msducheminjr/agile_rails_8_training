@@ -1,5 +1,9 @@
 <%= turbo_frame_tag(dom_id(product)) do %>
-  <li class='flex mb-6'>
+<% if product.id == current_product&.id %>
+  <li class="flex mb-6 product-highlight">
+<% else %>
+  <li class="flex mb-6">
+<% end %>
     <div class="flex-none w-40 h-48 mr-3 relative">
       <%= link_to line_items_path(product_id: product),
       class: "object-contain",
