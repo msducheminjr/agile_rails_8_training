@@ -30,7 +30,8 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect to catalog if invalid cart" do
     get cart_url("notarealid")
-    assert_redirected_to store_index_url, notice: "Invalid cart"
+    assert_redirected_to store_index_url
+    assert_equal "Invalid cart", flash[:notice]
   end
 
   test "should get edit" do
@@ -50,7 +51,8 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
       delete cart_url(@cart)
     end
 
-    assert_redirected_to store_index_url, notice: "Your cart is currently empty"
+    assert_redirected_to store_index_url
+    assert_equal "Your cart is currently empty", flash[:notice]
   end
 
   test "should fail to destroy another user's cart" do
@@ -58,6 +60,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
       delete cart_url(@cart)
     end
 
-    assert_redirected_to store_index_url, notice: "Invalid cart"
+    assert_redirected_to store_index_url
+    assert_equal "Invalid cart", flash[:notice]
   end
 end
