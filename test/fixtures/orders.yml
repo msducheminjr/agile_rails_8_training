@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sams:
+  name: Sam Ruby
+  address: |
+    123 Fake St
+    Apt 345
+    Durham, NH 03824
+  email: sam@example.com
+  pay_type: 1
+
+daves:
+  name: Dave Thomas
+  address: |
+    2 Fake Ln
+    Concord, NC 28025
+  email: dave@example.com
+  pay_type: 0

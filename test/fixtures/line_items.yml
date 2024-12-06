@@ -4,18 +4,23 @@ sams_pickaxe:
   product: pickaxe
   cart: sams
   quantity: 1
+  price: 33.95
 
 sams_pragprog:
   product: pragprog
   cart: sams
   quantity: 1
+  price: 39.99
 
+# has a different price than the product (39.99)
 daves_pragprog:
   product: pragprog
   cart: daves
   quantity: 1
+  price: 34.99
 
 daves_front_end:
   product: front_end
   cart: daves
   quantity: 3
+  price: 28.95
