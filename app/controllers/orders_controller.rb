@@ -71,7 +71,17 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.expect(order: [ :name, :address, :email, :pay_type ])
+      attrib_array = [ :name, :address, :email, :pay_type ]
+      if params["order"]["pay_type"] == "Check"
+        attrib_array << :routing_number
+        attrib_array << :account_number
+      elsif params["order"]["pay_type"] == "Credit card"
+        attrib_array << :credit_card_number
+        attrib_array << :expiration_date
+      elsif params["order"]["pay_type"] == "Purchase order"
+        attrib_array << :po_number
+      end
+      params.expect(order: attrib_array)
     end
 
     def ensure_cart_isnt_empty

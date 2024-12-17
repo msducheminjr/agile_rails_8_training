@@ -7,7 +7,9 @@ sams:
     Apt 345
     Durham, NH 03824
   email: sam@example.com
-  pay_type: 1
+  pay_type: 1 # credit card
+  credit_card_number: "4555000011112222"
+  expiration_date: "12/29"
 
 daves:
   name: Dave Thomas
@@ -15,4 +17,6 @@ daves:
     2 Fake Ln
     Concord, NC 28025
   email: dave@example.com
-  pay_type: 0
+  pay_type: 0 # check
+  routing_number: "123456789"
+  account_number: "0000013370024601"

@@ -45,7 +45,9 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Address", with: @order.address
     fill_in "Email", with: @order.email
     fill_in "Name", with: @order.name
-    select @order.pay_type, from: "Pay type"
+    select "Credit card", from: "Pay type"
+    fill_in "Credit card number", with: "5555444466667777"
+    fill_in "Expiration date", with: "08/29"
     assert_difference "Order.count" do
       click_on "Place Order"
 

@@ -30,7 +30,12 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Order.count") do
       assert_difference("Cart.count", -1) do
         assert_no_difference("LineItem.count") do
-          post orders_url, params: { order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type } }
+          post orders_url, params: { order: {
+              address: @order.address, email: @order.email, name: @order.name,
+              pay_type: "Check", routing_number: "123456789",
+              account_number: "00001234566"
+            }
+          }
         end
       end
     end
