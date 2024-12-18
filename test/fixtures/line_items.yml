@@ -24,3 +24,9 @@ daves_front_end:
   cart: daves
   quantity: 3
   price: 28.95
+
+sams_ordered_pragprog:
+  product: pragprog
+  order: sams
+  quantity: 1
+  price: 39.99
