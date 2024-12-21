@@ -3,7 +3,7 @@ require "application_system_test_case"
 class OrdersTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
   setup do
-    @order = orders(:daves)
+    @order = orders(:sams)
   end
 
   test "check dynamic fields" do
@@ -77,5 +77,28 @@ class OrdersTest < ApplicationSystemTestCase
     assert_equal [ "dave@example.com" ], mail.to
     assert_equal "Stateless Code <statelesscode@example.com>", mail[:from].value
     assert_equal "Pragmatic Store Order Confirmation", mail.subject
+  end
+
+  test "updating ship date" do
+    the_ship_date = Date.new(2024, 12, 25)
+
+    visit edit_order_url(@order)
+
+    fill_in "Ship date", with: the_ship_date
+
+    click_button "Update Order"
+
+    assert_text "Order was successfully updated."
+
+    assert_equal Date.new(2024, 12, 25), @order.reload.ship_date
+
+    perform_enqueued_jobs # shipped
+
+    assert_performed_jobs 1
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [ "sam@example.com" ], mail.to
+    assert_equal "Stateless Code <statelesscode@example.com>", mail[:from].value
+    assert_equal "Pragmatic Store Order Shipped", mail.subject
   end
 end

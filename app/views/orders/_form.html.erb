@@ -1,3 +1,4 @@
+<% button_label = 'Place Order' %>
 <%= form_with(model: order, class: "contents") do |form| %>
   <% if order.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -36,12 +37,21 @@
           class: "block shadow rounded-md border border-gray-400
                   outline-none px-3 py-2 mt-2 w-full" %>
     </div>
-    <%= render partial: 'check', locals: {form: form} %>
-    <%= render partial: 'cc', locals: {form: form} %>
-    <%= render partial: 'po', locals: {form: form} %>
+    <% if order.id.nil? %>
+      <%= render partial: 'check', locals: {form: form} %>
+      <%= render partial: 'cc', locals: {form: form} %>
+      <%= render partial: 'po', locals: {form: form} %>
+    <% else %>
+      <% button_label = "Update Order" %>
+      <div class="my-5">
+        <%= form.label :ship_date %>
+        <%= form.date_field :ship_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+    <% end %>
+
   </div>
 
   <div class="inline">
-    <%= form.submit 'Place Order', class: "rounded-lg py-3 px-5 bg-green-200 text-black inline-block font-medium cursor-pointer" %>
+    <%= form.submit button_label, class: "rounded-lg py-3 px-5 bg-green-200 text-black inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

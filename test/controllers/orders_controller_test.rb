@@ -50,8 +50,11 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type } }
+    patch order_url(@order), params: { order: {
+      address: @order.address, email: @order.email, name: @order.name,
+      pay_type: @order.pay_type, ship_date: "2024-12-25" } }
     assert_redirected_to order_url(@order)
+    assert_equal Date.new(2024, 12, 25), @order.reload.ship_date
   end
 
   test "should destroy order" do

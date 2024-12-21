@@ -44,7 +44,11 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params)
+      if @order.update(order_update_params)
+        # send shipped email if ship_date was modified by the update
+        if @order.ship_date_previously_changed?
+          OrderMailer.shipped(@order).deliver_later
+        end
         format.html { redirect_to @order, notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -73,6 +77,10 @@ class OrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def order_params
       params.expect(order: [ :name, :address, :email, :pay_type ])
+    end
+
+    def order_update_params
+      params.expect(order: [ :name, :address, :email, :pay_type, :ship_date ])
     end
 
     def pay_type_params
