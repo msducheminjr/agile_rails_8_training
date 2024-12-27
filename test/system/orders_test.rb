@@ -55,12 +55,15 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Routing number", with: "123456789"
     fill_in "Account number", with: "0000987654"
 
+    # clear enqueued and performed jobs to ensure clean start
+    clear_enqueued_jobs
+    clear_performed_jobs
+
     click_button "Place Order"
     assert_text "Thank you for your order"
 
     perform_enqueued_jobs # ChargeOrderJob
     perform_enqueued_jobs # confirmation email deliver_later
-
     assert_performed_jobs 2
 
     orders = Order.all
@@ -80,11 +83,18 @@ class OrdersTest < ApplicationSystemTestCase
   end
 
   test "updating ship date" do
+    clear_enqueued_jobs
+    clear_performed_jobs
+
     the_ship_date = Date.new(2024, 12, 25)
 
     visit edit_order_url(@order)
 
     fill_in "Ship date", with: the_ship_date
+
+    # clear enqueued and performed jobs to ensure clean start
+    clear_enqueued_jobs
+    clear_performed_jobs
 
     click_button "Update Order"
 

@@ -1,0 +1,22 @@
+<h3>Invalid Cart Attempt</h3>
+
+<p>An invalid attempt was made to access a cart that did not belong to the user.
+
+<dl>
+  <dt>Request Datetime:</dt> <dd><%= @req_time %></dd>
+  <dt>IP Address:</dt> <dd><%= @req[:ip] %></dd>
+  <dt>Remote IP Address:</dt> <dd><%= @req[:remote_ip] %></dd>
+  <dt>Original Full Path:</dt> <dd><%= @req[:original_fullpath] %></dd>
+  <dt>Full Path:</dt> <dd><%= @req[:fullpath] %></dd>
+  <dt>Request Method:</dt> <dd><%= @req[:method] %></dd>
+  <dt>Protocol:</dt> <dd><%= @req[:protocol] %></dd>
+</dl>
+
+<h4>Parameters:</h4>
+<dl>
+<% @req[:params].each do |key, value| %>
+  <dt><%= key %>:</dt> <dd><%= value %></dd>
+<% end %>
+</dl>
+
+<p>Examine the nature of the error and ensure attack vectors are adequately defended.</p>

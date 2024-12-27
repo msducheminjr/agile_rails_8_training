@@ -76,6 +76,20 @@ class CartsController < ApplicationController
 
     def invalid_cart
       logger.error "Attempt to access invalid cart #{params[:id]}"
+      ErrorMailer.invalid_cart(invalid_cart_req_hash, Time.current).deliver_later
       redirect_to store_index_url, notice: "Invalid cart"
+    end
+
+    def invalid_cart_req_hash
+      req = self.request
+      {
+        ip: req.ip,
+        remote_ip: req.remote_ip,
+        original_fullpath: req.original_fullpath,
+        fullpath: req.fullpath,
+        method: req.method,
+        protocol: req.protocol,
+        params: params.to_unsafe_h
+      }
     end
 end

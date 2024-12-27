@@ -1,6 +1,7 @@
 require "test_helper"
 
 class CartsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
   setup do
     @cart = carts(:sams)
   end
@@ -62,5 +63,12 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to store_index_url
     assert_equal "Invalid cart", flash[:notice]
+
+    perform_enqueued_jobs
+    assert_performed_jobs 1
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal "Invalid cart params access attempt", mail.subject
+    assert_equal [ "error-monitoring@statelesscode.example.com" ], mail.to
+    assert_equal [ "statelesscode@example.com" ], mail.from
   end
 end

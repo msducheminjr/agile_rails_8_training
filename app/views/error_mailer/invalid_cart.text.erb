@@ -1,0 +1,16 @@
+An invalid attempt was made to access a cart that did not belong to the user.
+
+Request Datetime: <%= @req_time %>
+IP Address: <%= @req[:ip] %>
+Remote IP Address: <%= @req[:remote_ip] %>
+Original Full Path: <%= @req[:original_fullpath] %>
+Full Path: <%= @req[:fullpath] %>
+Request Method: <%= @req[:method] %>
+Protocol: <%= @req[:protocol] %>
+
+Parameters:
+<% @req[:params].each do |key, value| %>
+  <%= key %>: <%= value %>
+<% end %>
+
+Examine the nature of the error and ensure attack vectors are adequately defended.
