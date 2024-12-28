@@ -79,7 +79,14 @@ class OrderTest < ActiveSupport::TestCase
     error = assert_raises StandardError do
       @order.charge!({})
     end
+    perform_enqueued_jobs
+    assert_performed_jobs 1
+    mail = ActionMailer::Base.deliveries.last
     assert_equal "Unknown payment_method ", error.message
+    assert_match(
+      /Error\: Unknown payment_method\s/,
+      mail.body.encoded
+    )
   end
 
   private

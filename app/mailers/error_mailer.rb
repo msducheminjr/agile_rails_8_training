@@ -11,4 +11,15 @@ class ErrorMailer < ApplicationMailer
 
     mail subject: "Invalid cart params access attempt"
   end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.error_mailer.pago_failure.subject
+  #
+  def pago_failure(order, error)
+    @order = order
+    @error = error
+    mail subject: "Pago processing error occurred"
+  end
 end

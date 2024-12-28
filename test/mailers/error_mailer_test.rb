@@ -28,4 +28,20 @@ class ErrorMailerTest < ActionMailer::TestCase
       <dd>delete<\/dd>\s*
     }x, mail.body.encoded
   end
+
+  test "pago failure" do
+    order = orders(:daves)
+    mail = ErrorMailer.pago_failure(order, "Something went wrong")
+    assert_equal "Pago processing error occurred", mail.subject
+    assert_equal [ "error-monitoring@statelesscode.example.com" ], mail.to
+    assert_equal [ "statelesscode@example.com" ], mail.from
+    assert_match(
+      /Error occurred when trying to charge Pago for order ID #{order.id}\./,
+      mail.body.encoded
+    )
+    assert_match(
+      /Error\: Something went wrong/,
+      mail.body.encoded
+    )
+  end
 end

@@ -48,6 +48,7 @@ class Order < ApplicationRecord
     if payment_result.succeeded?
       OrderMailer.received(self).deliver_later
     else
+      ErrorMailer.pago_failure(self, payment_result.error).deliver_later
       raise payment_result.error
     end
     payment_result
