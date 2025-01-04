@@ -27,5 +27,26 @@ module ActiveSupport
         )
       end
     end
+
+    def login_as(user, password = "password")
+      get users_path
+      post session_path, params: {
+        email_address: user.email_address,
+        password: password
+      }
+    end
+    # Exectutes a block and then sleeps for a default or specified amount of time
+    #
+    # This is needed for an example situation where a SystemTestCase would send an
+    # email and there is a race condition where the next line of code that needs
+    # the email to be sent executes without the email being added to to the
+    # ActionMailer::Base.deliveries array.
+    #
+    # @param sleep_time DEFAULT 0.05 the amount of time in seconds to sleep after
+    # yielding the block
+    def await_jobs(sleep_time = 0.05)
+      yield
+      sleep sleep_time
+    end
   end
 end

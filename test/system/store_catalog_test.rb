@@ -2,11 +2,13 @@ require "application_system_test_case"
 
 class StoreCatalogTest < ApplicationSystemTestCase
   test "visiting the home page" do
+    browser_login_as users(:one)
     visit "/"
     store_index_assertions!
   end
 
   test "adding first item to cart and emptying cart" do
+    browser_login_as users(:one)
     @first_product = Product.order(:title).first
     visit "/"
     store_index_assertions!

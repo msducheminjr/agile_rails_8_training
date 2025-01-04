@@ -3,6 +3,7 @@ require "test_helper"
 class LineItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @line_item = line_items(:sams_pragprog)
+    login_as users(:sam)
   end
 
   test "should get index" do

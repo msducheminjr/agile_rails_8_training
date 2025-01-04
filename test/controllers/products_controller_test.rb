@@ -5,6 +5,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @product = products(:pickaxe)
     @title = "Stateless Coding"
     @image_file = fixture_file_upload("stateless_logo_256.png", "image/png")
+    login_as users(:one)
   end
 
   test "should get index" do
