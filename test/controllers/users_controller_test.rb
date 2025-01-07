@@ -48,4 +48,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to users_url
   end
+
+  test "should not destroy last user" do
+    User.where.not(id: @user.id).destroy_all
+    assert_no_difference("User.count") do
+      delete user_url(@user)
+    end
+
+    assert_redirected_to users_url
+    assert_equal "Can't delete last user", flash[:notice]
+  end
 end
