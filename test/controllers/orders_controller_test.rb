@@ -3,10 +3,10 @@ require "test_helper"
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @order = orders(:daves)
-    login_as users(:dave), "different"
   end
 
   test "should get index" do
+    login_as users(:one)
     get orders_url
     assert_response :success
   end
@@ -41,21 +41,25 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show order" do
+    login_as users(:one)
     get order_url(@order)
     assert_response :success
   end
 
   test "should get edit" do
+    login_as users(:one)
     get edit_order_url(@order)
     assert_response :success
   end
 
   test "should update order" do
+    login_as users(:one)
     patch order_url(@order), params: { order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type } }
     assert_redirected_to order_url(@order)
   end
 
   test "should destroy order" do
+    login_as users(:one)
     assert_difference("Order.count", -1) do
       delete order_url(@order)
     end

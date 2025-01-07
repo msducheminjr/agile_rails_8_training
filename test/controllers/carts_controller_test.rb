@@ -3,15 +3,16 @@ require "test_helper"
 class CartsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @cart = carts(:sams)
-    login_as users(:sam)
   end
 
   test "should get index" do
+    login_as users(:sam)
     get carts_url
     assert_response :success
   end
 
   test "should get new" do
+    login_as users(:sam)
     get new_cart_url
     assert_response :success
   end
@@ -25,17 +26,20 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show cart" do
+    login_as users(:sam)
     get cart_url(@cart)
     assert_response :success
   end
 
   test "should redirect to catalog if invalid cart" do
+    login_as users(:sam)
     get cart_url("notarealid")
     assert_redirected_to store_index_url
     assert_equal "Invalid cart", flash[:notice]
   end
 
   test "should get edit" do
+    login_as users(:sam)
     get edit_cart_url(@cart)
     assert_response :success
   end
