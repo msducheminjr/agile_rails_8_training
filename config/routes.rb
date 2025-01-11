@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get "admin" => "admin#index"
   resources :users
-  resource :session
-  resources :passwords, param: :token
+  resource :session, only: %i[ new create destroy ]
+  resources :passwords, except: %i[ index show destroy ], param: :token
   resources :orders
   resources :line_items
   resources :carts
