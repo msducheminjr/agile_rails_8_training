@@ -22,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
     user.email_address = @user.email_address
     assert user.invalid?
     assert_equal [ "has already been taken" ], user.errors[:email_address]
-    user.email_address = "StatelessCode@example.com  "
+    user.email_address = "StatelessCodeAdmin@example.com  "
     assert user.invalid?
     assert_equal [ "has already been taken" ], user.errors[:email_address]
     @user.email_address = "AnotherEmail@examPle.com   "

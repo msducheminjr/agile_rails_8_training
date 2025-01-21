@@ -29,8 +29,8 @@ module ActiveSupport
     end
 
     def login_as(user, password = "password")
-      get users_path
-      post session_path, params: {
+      get users_url
+      post session_url, params: {
         email_address: user.email_address,
         password: password
       }

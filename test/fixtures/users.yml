@@ -4,7 +4,7 @@ DEFAULTS: &DEFAULTS
 one:
   <<: *DEFAULTS
   name: StatelessCode
-  email_address: statelesscode@example.com
+  email_address: statelesscodeadmin@example.com
 
 sam:
   <<: *DEFAULTS
