@@ -13,4 +13,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     assert_no_text "Try another email address or password."
   end
+
+  # remove temp files created by tests for ActiveStorage
+  def remove_uploaded_files
+    FileUtils.rm_rf("#{Rails.root}/tmp/storage")
+    # maintain the .keep file so it doesn't show up as deleted in Git
+    FileUtils.mkdir("#{Rails.root}/tmp/storage")
+    FileUtils.touch("#{Rails.root}/tmp/storage/.keep")
+  end
+
+  def after_teardown
+    super
+    remove_uploaded_files
+  end
 end
