@@ -44,6 +44,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_url
     assert_nil flash[:alert]
     assert_equal "You have successfully logged out.", flash[:notice]
+    assert_equal '"cache","storage"', @response.headers["Clear-Site-Data"]
   end
 
   test "cannot logout unless authenticated" do
