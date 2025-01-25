@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(create_user_params)
 
     respond_to do |format|
       if @user.save
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(update_user_params)
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -68,7 +68,19 @@ class UsersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def user_params
-      params.expect(user: [ :name, :email_address, :password, :password_confirmation ])
+    def create_user_params
+      params.expect(user: base_param_fields)
+    end
+
+    def update_user_params
+      update_fields = [ :name, :email_address ]
+      if params[:user][:password].to_s.length > 0
+        update_fields = base_param_fields << :password_challenge
+      end
+      params.expect(user: update_fields)
+    end
+
+    def base_param_fields
+      [ :name, :email_address, :password, :password_confirmation, :password_challenge ]
     end
 end

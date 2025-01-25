@@ -32,12 +32,26 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Edit this user", match: :first
 
     fill_in "Email address", with: user.email_address
-    fill_in "Name", with: user.name
+    fill_in "Name", with: "Samuel Ruby"
+    fill_in "Current password (only if changing)", with: "password"
     fill_in "Password", with: "secret"
     fill_in "Password confirmation", with: "secret"
     click_on "Update User"
 
-    assert_text "User Sam Ruby was successfully updated"
+    assert_text "User Samuel Ruby was successfully updated"
+  end
+
+  test "should update User without password change" do
+    browser_login_as @user
+    user = users(:sam)
+    visit user_url(user)
+    click_on "Edit this user", match: :first
+
+    fill_in "Email address", with: user.email_address
+    fill_in "Name", with: "Samuel Ruby"
+    click_on "Update User"
+
+    assert_text "User Samuel Ruby was successfully updated"
   end
 
   test "should destroy User" do

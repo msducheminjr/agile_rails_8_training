@@ -8,7 +8,6 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     @bad_token_message = "Password reset link is invalid or has expired."
     @bogus_token = "I'mfromthegovernmentI'mheretohelp"
     @new_pw = "Th1sI$MyN3w1"
-    @update_failure_alert = "Passwords did not match or invalid current password."
   end
 
   test "should get new" do
@@ -68,12 +67,10 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @bad_token_message, flash[:alert]
   end
 
-  test "should update password with valid token, challenge, and matching passwords" do
+  test "should update password with valid token and matching passwords" do
     token = @user.password_reset_token
 
-    patch password_url(token), params: {
-      password: @new_pw, password_confirmation: @new_pw, password_challenge: @pw
-    }
+    patch password_url(token), params: { password: @new_pw, password_confirmation: @new_pw }
 
     assert_redirected_to new_session_url
     assert_equal "Password has been reset.", flash[:notice]
@@ -85,18 +82,7 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     patch password_url(token), params: { password: @new_pw, password_confirmation: "mismatch" }
 
     assert_redirected_to edit_password_url(token)
-    assert_equal @update_failure_alert, flash[:alert]
-  end
-
-  test "should not update password with valid token and failed password challenge" do
-    token = @user.password_reset_token
-
-    patch password_url(token), params: {
-      password: @new_pw, password_confirmation: @new_pw, password_challenge: "wrong"
-    }
-
-    assert_redirected_to edit_password_url(token)
-    assert_equal @update_failure_alert, flash[:alert]
+    assert_equal "Passwords did not match.", flash[:alert]
   end
 
   test "should not update with invalid token" do

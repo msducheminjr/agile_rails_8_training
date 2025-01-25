@@ -22,12 +22,19 @@
     <%= form.text_field :email_address, class: "input-field" %>
   </div>
 
+  <% if action == "edit" %>
+  <div class="my-5">
+    <%= form.label :password_challenge, "Current password (only if changing)" %>
+    <%= form.password_field :password_challenge, class: "input-field" %>
+  </div>
+  <% end %>
+
   <div class="my-5">
     <%= form.label :password %>
     <%= form.password_field :password, class: "input-field" %>
-</div>
+  </div>
 
-<div class="my-5">
+  <div class="my-5">
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation, class: "input-field" %>
   </div>
