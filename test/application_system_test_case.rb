@@ -16,10 +16,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   # remove temp files created by tests for ActiveStorage
   def remove_uploaded_files
-    FileUtils.rm_rf("#{Rails.root}/tmp/storage")
+    temp_dir = "#{Rails.root}/tmp/storage"
+    FileUtils.rm_rf(temp_dir)
     # maintain the .keep file so it doesn't show up as deleted in Git
-    FileUtils.mkdir("#{Rails.root}/tmp/storage")
-    FileUtils.touch("#{Rails.root}/tmp/storage/.keep")
+    FileUtils.mkdir(temp_dir) unless Dir.exist?(temp_dir)
+    FileUtils.touch("#{temp_dir}/.keep")
   end
 
   def after_teardown
