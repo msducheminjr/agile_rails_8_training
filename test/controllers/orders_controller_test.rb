@@ -3,6 +3,10 @@ require "test_helper"
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @order = orders(:daves)
+    I18n.locale = I18n.default_locale
+  end
+  teardown do
+    I18n.locale = I18n.default_locale
   end
 
   test "should get index" do

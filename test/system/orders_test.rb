@@ -4,6 +4,10 @@ class OrdersTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
   setup do
     @order = orders(:daves)
+    I18n.locale = I18n.default_locale
+  end
+  teardown do
+    I18n.locale = I18n.default_locale
   end
 
   test "check dynamic fields" do
