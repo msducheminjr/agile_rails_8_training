@@ -7,14 +7,14 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Line items</h1>
-    <%= link_to "New line item", new_line_item_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New line item", new_line_item_path(locale: I18n.locale), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="line_items" class="min-w-full">
     <% @line_items.each do |line_item| %>
       <%= render line_item %>
       <p>
-        <%= link_to "Show this line item", line_item, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to "Show this line item", line_item_path(line_item, locale: I18n.locale), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       </p>
     <% end %>
   </div>

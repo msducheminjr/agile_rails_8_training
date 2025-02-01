@@ -7,14 +7,14 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Orders</h1>
-    <%= link_to "New order", new_order_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New order", new_order_path(locale: I18n.locale), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="orders" class="min-w-full">
     <% @orders.each do |order| %>
       <%= render order %>
       <p>
-        <%= link_to "Show this order", order, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to "Show this order", order_path(order, locale: I18n.locale), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       </p>
     <% end %>
   </div>

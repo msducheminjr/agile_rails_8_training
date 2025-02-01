@@ -26,6 +26,32 @@
 #     en:
 #       "yes": yup
 #       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  order_thanks: "Thank you for your order."
+  cart_empty: "Your cart is currently empty"
+  number:
+    currency:
+      format:
+        unit: "$"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format: "%u%n"
+  layouts:
+    application:
+      title: "The Pragmatic Bookshelf"
+      home: "Home"
+      questions: "Questions"
+      news: "News"
+      contact: "Contact"
+  store:
+    index:
+      title_html: "Your Pragmatic Catalog"
+    product:
+      add_html: "Add to Cart"
+  carts:
+    cart:
+        title: "Your Cart"
+        empty: "Empty Cart"
+        checkout: "Checkout"
+        total: "Total:"

@@ -27,7 +27,7 @@ class CartsController < ApplicationController
 
     respond_to do |format|
       if @cart.save
-        format.html { redirect_to @cart, notice: "Cart was successfully created." }
+        format.html { redirect_to cart_path(@cart, locale: I18n.locale), notice: "Cart was successfully created." }
         format.json { render :show, status: :created, location: @cart }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class CartsController < ApplicationController
   def update
     respond_to do |format|
       if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: "Cart was successfully updated." }
+        format.html { redirect_to cart_path(@cart, locale: I18n.locale), notice: "Cart was successfully updated." }
         format.json { render :show, status: :ok, location: @cart }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to store_index_url, status: :see_other, notice: "Your cart is currently empty" }
+      format.html { redirect_to store_index_url(locale: I18n.locale), status: :see_other, notice: I18n.t(".cart_empty") }
       format.json { head :no_content }
     end
   end
@@ -77,6 +77,6 @@ class CartsController < ApplicationController
 
     def invalid_cart
       logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_to store_index_url, notice: "Invalid cart"
+      redirect_to store_index_url(locale: I18n.locale), notice: "Invalid cart"
     end
 end

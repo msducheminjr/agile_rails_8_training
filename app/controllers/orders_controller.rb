@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
-        format.html { redirect_to store_index_url, notice: "Thank you for your order." }
+        format.html { redirect_to store_index_url(locale: I18n.locale), notice: I18n.t(".order_thanks") }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: "Order was successfully updated." }
+        format.html { redirect_to order_url(@order, locale: I18n.locale), notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
     @order.destroy!
 
     respond_to do |format|
-      format.html { redirect_to orders_path, status: :see_other, notice: "Order was successfully destroyed." }
+      format.html { redirect_to orders_path(locale: I18n.locale), status: :see_other, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
 
     def ensure_cart_isnt_empty
       if @cart.line_items.empty?
-        redirect_to store_index_url, notice: "Your cart is empty"
+        redirect_to store_index_url(locale: I18n.locale), notice: I18n.t(".cart_empty")
       end
     end
 end

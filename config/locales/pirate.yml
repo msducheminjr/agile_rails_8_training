@@ -1,0 +1,30 @@
+# see default locale en for documentation comment
+pirate:
+  order_thanks: "Thank ye for yer orrrder, matey."
+  cart_empty: "Arrrr, yer cart be scuttled..."
+  number:
+    currency:
+      format:
+        unit: "US pieces o'8"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format: "%n %u"
+  layouts:
+    application:
+      title: "Ye Pragmatic Book Booty"
+      home: "Captain's Cabin"
+      questions: "Yer Questions"
+      news: "Scuttlebutt"
+      contact: "Hollar"
+  store:
+    index:
+      title_html: "Yer Pragmatic Catalog"
+    product:
+      add_html: "Add to Booty"
+  carts:
+    cart:
+        title: "Yer Cart"
+        empty: "Scuttle Cart"
+        checkout: "Checkout! Arrr!"
+        total: "Yer Total:"

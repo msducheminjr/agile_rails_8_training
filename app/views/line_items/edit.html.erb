@@ -3,6 +3,6 @@
 
   <%= render "form", line_item: @line_item %>
 
-  <%= link_to "Show this line item", @line_item, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to line items", line_items_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Show this line item", line_item_path(@line_item, locale: I18n.locale), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Back to line items", line_items_path(locale: I18n.locale), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
