@@ -8,6 +8,59 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     login_as users(:one)
   end
 
+  test "should not allowed access for public" do
+    # logout
+    assert_difference("Session.count", -1) do
+      delete session_url
+    end
+
+    # try the different product routes and ensure no access
+    # index
+    get products_url
+    no_access_assertions!
+
+    # new
+    get new_product_url
+    no_access_assertions!
+
+    # create
+    assert_no_difference("Product.count") do
+      post products_url, params: {
+        product: {
+          description: @product.description, price: @product.price,
+          title: @title,
+          image: @image_file
+        }
+      }
+    end
+    no_access_assertions!
+
+    # show
+    get product_url(@product)
+    no_access_assertions!
+
+    # edit
+    get edit_product_url(@product)
+    no_access_assertions!
+
+    # update
+    patch product_url(@product), params: {
+      product: {
+        description: @product.description,
+        price: @product.price,
+        title: @title,
+        image: @image_file
+      }
+    }
+    no_access_assertions!
+
+    # destroy
+    assert_no_difference("Product.count") do
+      delete product_url(products(:rails_scales))
+    end
+    no_access_assertions!
+  end
+
   test "should get index" do
     get products_url
     assert_response :success
@@ -93,5 +146,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       assert_select "form div label", "Description"
       assert_select "form div label", "Image"
       assert_select "form div label", "Price"
+    end
+
+    def no_access_assertions!
+      assert_redirected_to new_session_url
+      assert_equal "You must login first.", flash[:notice]
     end
 end
