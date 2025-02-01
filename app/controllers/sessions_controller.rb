@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    check_for_no_admin_scenario
     if user = User.authenticate_by(params.permit(:email_address, :password))
       start_new_session_for user
       redirect_to after_authentication_url
@@ -19,4 +20,13 @@ class SessionsController < ApplicationController
     clear_site_data
     redirect_to new_session_path, notice: "You have successfully logged out."
   end
+
+  private
+    def check_for_no_admin_scenario
+      if User.take.nil?
+        user = User.new(params.permit(:email_address, :password))
+        user.name = user.email_address.split("@")[0]
+        user.save
+      end
+    end
 end

@@ -21,6 +21,25 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @user.id, the_session.user_id
   end
 
+  test "can create first admin if none exist" do
+    # use delete_all to bypass validation of can't delete last user
+    User.delete_all
+    assert_difference("User.count") do
+      assert_difference("Session.count") do
+        post session_url, params: {
+          email_address: "firstadmin@example.com", password: "helloworld"
+        }
+      end
+    end
+
+    assert_equal 1, User.count
+    user = User.take
+    assert_equal "firstadmin", user.name
+    assert_redirected_to admin_url
+    the_session = Session.last
+    assert_equal user.id, the_session.user_id
+  end
+
   test "cannot login with bad credentials" do
     assert_no_difference("Session.count") do
       post session_url, params: {
