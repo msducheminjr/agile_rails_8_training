@@ -27,8 +27,14 @@
 #       "yes": yup
 #       enabled: "ON"
 en:
-  order_thanks: "Thank you for your order."
+  thanks: "Thank you for your order."
   cart_empty: "Your cart is currently empty"
+  errors:
+    template:
+      body: "There were problems with the following fields:"
+      header:
+        one: "1 error prohibited this %{model} from being saved"
+        other: "%{count} errors prohibited this %{model} from being saved"
   number:
     currency:
       format:
@@ -55,3 +61,30 @@ en:
         empty: "Empty Cart"
         checkout: "Checkout"
         total: "Total:"
+  orders:
+    index:
+      destroy_confirm: "Are you sure?"
+    new:
+      legend: "Please Enter Your Details"
+    edit:
+      legend: "Please Update Your Details"
+    form:
+      name: "Name"
+      address_html: "Address"
+      email: "Email"
+      pay_type: "Pay with"
+      pay_prompt_html: "Select a payment method"
+      submit: "Place Order"
+      update: "Update Order"
+      pay_types:
+        "Check": "Check"
+        "Credit card": "Credit card"
+        "Purchase order": "Purchase order"
+    check:
+      routing_number: "Routing #"
+      account_number: "Account #"
+    cc:
+      cc_number: "CC #"
+      expiration_date: "Expiry"
+    po:
+      po_number: "PO #"

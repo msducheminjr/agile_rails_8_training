@@ -1,7 +1,26 @@
 # see default locale en for documentation comment
 pirate:
-  order_thanks: "Thank ye for yer orrrder, matey."
+  thanks: "Thank ye for yer orrrder, matey."
   cart_empty: "Arrrr, yer cart be scuttled..."
+  activerecord:
+    errors:
+      messages:
+        inclusion: "ain't included in the list, matey"
+        blank: "can't be blank, lest ye get a cutlass to the chest"
+    models:
+      order: "orrrder"
+    attributes:
+      order:
+        address: "Address or Ship"
+        name: "Yer name"
+        email: "Yer email"
+        pay_type: "Yer payment method"
+  errors:
+    template:
+      body: "There be problems with the fields below, matey:"
+      header:
+        one: "1 error sunk yer chance to save this %{model}"
+        other: "%{count} errors sunk yer chance to save this %{model}"
   number:
     currency:
       format:
@@ -28,3 +47,30 @@ pirate:
         empty: "Scuttle Cart"
         checkout: "Checkout! Arrr!"
         total: "Yer Total:"
+  orders:
+    index:
+      destroy_confirm: "Arrre you sure, matey?"
+    new:
+      legend: "Enter Yer Details"
+    edit:
+      legend: "Update Yer Details"
+    form:
+      name: "Name"
+      address_html: "Address or Ship"
+      email: "E-mail"
+      pay_type: "Yer payment method"
+      pay_prompt_html: "Pick yer payment method"
+      submit: "Get Loot"
+      update: "Update Yer Order"
+      pay_types:
+        "Check": "Cheque"
+        "Credit card": "Plastic"
+        "Purchase order": "IOU"
+    check:
+      routing_number: "Routing number for banking crew"
+      account_number: "Bank account number"
+    cc:
+      cc_number: "Sixteen plastic digits"
+      expiration_date: "Date it goes to Davy Jones' locker"
+    po:
+      po_number: "IOU #"

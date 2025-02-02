@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_i18n_locale_from_params
+  around_action :switch_locale
 
   include Authentication
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -16,17 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-    def set_i18n_locale_from_params
-      if params[:locale]
-        if I18n.available_locales.map(&:to_s).include?(params[:locale])
-          I18n.locale = params[:locale]
-        else
-          flash.now[:notice] =
-          "#{params[:locale]} translation not available"
-          logger.error flash.now[:notice]
-        end
-      else
-        I18n.locale = I18n.default_locale
+    def switch_locale(&action)
+      locale = params[:locale]&.to_sym || I18n.default_locale
+      unless I18n.available_locales.include?(locale)
+        flash.now[:notice] =
+        "#{params[:locale]} translation not available"
+        logger.error flash.now[:notice]
+        locale = I18n.default_locale
       end
+      I18n.with_locale(locale, &action)
     end
 end
