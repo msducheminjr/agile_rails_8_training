@@ -31,11 +31,8 @@ class StoreCatalogTest < ApplicationSystemTestCase
     @first_product = Product.order(:title).first
     visit store_index_path(locale: "es")
     store_shared_assertions!
-    assert_selector "h1", text: "Su Catálogo de Pragmatic"
-    assert_selector "nav a", text: "Inicio"
-    assert_selector "nav a", text: "Preguntas"
-    assert_selector "nav a", text: "Noticias"
-    assert_selector "nav a", text: "Contacto"
+    store_index_spanish_assertions!
+
     click_on "Añadir al Carrito", match: :first
     assert_selector "div h2", text: "Carrito de la Compra"
     assert_selector "div table tr.line-item-highlight td", text: @first_product.title
@@ -47,16 +44,35 @@ class StoreCatalogTest < ApplicationSystemTestCase
     @first_product = Product.order(:title).first
     visit store_index_path(locale: "pirate")
     store_shared_assertions!
-    assert_selector "h1", text: "Yer Pragmatic Catalog"
-    assert_selector "nav a", text: "Captain's Cabin"
-    assert_selector "nav a", text: "Yer Questions"
-    assert_selector "nav a", text: "Scuttlebutt"
-    assert_selector "nav a", text: "Hollar"
+    store_index_pirate_assertions!
+
     click_on "Add to Booty", match: :first
     assert_selector "div h2", text: "Yer Cart"
     assert_selector "div table tr.line-item-highlight td", text: @first_product.title
     click_on "Scuttle Cart"
     assert_text "Arrrr, yer cart be scuttled..."
+  end
+
+  test "using the locale switcher" do
+    # starts in English
+    visit store_index_path
+    store_shared_assertions!
+    store_index_english_assertions!
+
+    # Spanish
+    select "Español", from: "set_locale"
+    store_shared_assertions!
+    store_index_spanish_assertions!
+
+    # Pirate
+    select "Pirate", from: "set_locale"
+    store_shared_assertions!
+    store_index_pirate_assertions!
+
+    # Back to English
+    select "English", from: "set_locale"
+    store_shared_assertions!
+    store_index_english_assertions!
   end
 
   private
@@ -73,5 +89,23 @@ class StoreCatalogTest < ApplicationSystemTestCase
       assert_selector "nav a", text: "Questions"
       assert_selector "nav a", text: "News"
       assert_selector "nav a", text: "Contact"
+    end
+
+    def store_index_spanish_assertions!
+      assert_selector "h1", text: "Su Catálogo de Pragmatic"
+      assert_selector "nav a", text: "Inicio"
+      assert_selector "nav a", text: "Preguntas"
+      assert_selector "nav a", text: "Noticias"
+      assert_selector "nav a", text: "Contacto"
+      assert_text "Añadir al Carrito"
+    end
+
+    def store_index_pirate_assertions!
+      assert_selector "h1", text: "Yer Pragmatic Catalog"
+      assert_selector "nav a", text: "Captain's Cabin"
+      assert_selector "nav a", text: "Yer Questions"
+      assert_selector "nav a", text: "Scuttlebutt"
+      assert_selector "nav a", text: "Hollar"
+      assert_text "Add to Booty"
     end
 end
