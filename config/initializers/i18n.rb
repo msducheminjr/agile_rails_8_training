@@ -6,3 +6,5 @@ LANGUAGES = [
   [ "Español", "es" ],
   [ "Pirate", "pirate" ]
 ]
+
+LOCALES = LANGUAGES.collect(&:second)

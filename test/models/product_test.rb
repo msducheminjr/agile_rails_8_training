@@ -23,6 +23,25 @@ class ProductTest < ActiveSupport::TestCase
     assert product.errors[:image].any?
   end
 
+  test "requires valid locale" do
+    assert_raises ArgumentError, "'klingon' is not a valid locale" do
+      @product.locale = "klingon"
+    end
+    out_of_bounds = LOCALES.length
+    assert_raises ArgumentError, "'#{out_of_bounds}' is not a valid locale" do
+      @product.locale = out_of_bounds
+    end
+    @product.locale = ""
+    assert @product.invalid?
+    assert_equal [ "is not included in the list" ], @product.errors[:locale]
+
+    # ensure all locales are valid
+    LOCALES.each do |loc|
+      @product.locale = loc
+      assert @product.valid?
+    end
+  end
+
   test "product price must be positive" do
     err_message = "must be greater than or equal to 0.01"
     @product.price = -1

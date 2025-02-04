@@ -91,38 +91,42 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
     def locale_agnostic_assertions!
       assert_response :success
       assert_select "nav a", minimum: 4
-      assert_select "main ul li", 4
-      assert_select "h2", "The Pragmatic Programmer"
     end
 
     def english_store_assertions!
       assert_select "h1", "Your Pragmatic Catalog"
+      assert_select "h2", "The Pragmatic Programmer"
       assert_select "nav a", "Home"
       assert_select "nav a", "Questions"
       assert_select "nav a", "News"
       assert_select "nav a", "Contact"
       assert_select "button", "Add to Cart"
+      assert_select "main ul li", 4
       assert_select "div span.price", /\$[,\d]+\.\d\d/
     end
 
     def spanish_store_assertions!
       assert_select "h1", "Su Catálogo de Pragmatic"
+      assert_select "h2", "Don Quixote"
       assert_select "nav a", "Inicio"
       assert_select "nav a", "Preguntas"
       assert_select "nav a", "Noticias"
       assert_select "nav a", "Contacto"
       assert_select "button", "Añadir al Carrito"
+      assert_select "main ul li", 1
       # the non-breaking space isn't matching \s so using .
       assert_select "div span.price", /[\.\d]+,\d\d.\$US/
     end
 
     def pirate_store_assertions!
       assert_select "h1", "Yer Pragmatic Catalog"
+      assert_select "h2", "Treasure Island"
       assert_select "nav a", "Captain's Cabin"
       assert_select "nav a", "Yer Questions"
       assert_select "nav a", "Scuttlebutt"
       assert_select "nav a", "Hollar"
       assert_select "button", "Add to Booty"
+      assert_select "main ul li", 1
       assert_select "div span.price", /\A[,\d]+\.\d\d\sUS\spieces\so\'8\z/
     end
 end

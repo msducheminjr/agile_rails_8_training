@@ -15,3 +15,11 @@ pragprog_image_attachment:
   name: image
   record: pragprog (Product)
   blob: pragprog_image_blob
+quixote_image_attachment:
+  name: image
+  record: quixote (Product)
+  blob: pragprog_image_blob
+treasure_island_image_attachment:
+  name: image
+  record: treasure_island (Product)
+  blob: pragprog_image_blob

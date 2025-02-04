@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
   has_one_attached :image
   has_many :line_items
+
+  enum :locale, LOCALES.each_with_index.to_h
+
   after_commit -> { broadcast_refresh_later_to "products" }
   before_destroy :ensure_not_referenced_by_any_line_item
   validates :title, :description, :image, presence: true
@@ -16,6 +19,7 @@ class Product < ApplicationRecord
   end
 
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :locale, inclusion: locales.keys
 
   private
     # ensure that there are no line items referencing this product

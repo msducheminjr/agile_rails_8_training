@@ -65,8 +65,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     get products_url
     assert_response :success
     assert_select "nav a", minimum: 4
-    assert_select "main table tbody tr", 4
-    assert_select "main ul li", 12 # 3 per fixture
+    assert_select "main table tbody tr", 6
+    assert_select "main ul li", 18 # 3 per fixture
     assert_select "h1", "Products"
     assert_select "tr td p", /\$[,\d]+\.\d\d/
   end

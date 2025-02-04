@@ -15,6 +15,7 @@ pickaxe:
     matching and Ractors—and describes the language through Ruby 3.3.
     </p>
   price: 33.95
+  locale: 0
 
 rails_scales:
   title: Rails Scales!
@@ -32,6 +33,7 @@ rails_scales:
     maintaining it.
     </p>
   price: 30.95
+  locale: 0
 
 front_end:
   title: Modern Front-End Development for Rails, Second Edition
@@ -48,8 +50,29 @@ front_end:
     your toolkit today!
     </p>
   price: 28.95
+  locale: 0
 
 pragprog:
   title: The Pragmatic Programmer
   description: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)
   price: 39.99
+  locale: 0
+
+quixote:
+  title: Don Quixote
+  description: |
+    <p>Novela española de Miguel de Cervantes. Se publicó originalmente en
+    dos partes, en 1605 y 1615. Se considera una obra fundacional de la
+    literatura occidental.
+    </p>
+  price: 19.95
+  locale: 1
+
+treasure_island:
+  title: Treasure Island
+  description: |
+    <p>Avast matey!. The thrillin' tale of Jim Hawkins and his run-ins with
+    the scurvy pirate Long John Silver
+    </p>
+  price: 21.95
+  locale: 2
