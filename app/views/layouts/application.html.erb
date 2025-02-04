@@ -18,7 +18,6 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -29,7 +28,7 @@
         <%= form_with url: store_index_path, class: 'locale' do %>
           <%= select_tag 'set_locale',
             options_for_select(LANGUAGES, I18n.locale.to_s),
-            onchange: 'this.form.submit()' %>
+            onchange: 'this.form.submit()', class: "bg-gray-50 p-2" %>
           <%= submit_tag 'submit', data: {'locale-target' => 'submit'} %>
         <% end %>
       </aside>
