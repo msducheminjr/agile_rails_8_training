@@ -122,9 +122,9 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
       assert_select "table tfoot tr th", "Total:"
       assert_select "button", "Vaciar Carrito"
       assert_select "button", "Comprar"
-      assert_select "main table tr td.font-bold", /33,95.\$US/
-      assert_select "main table tr td.font-bold", /39,99.\$US/
-      assert_select "main tfoot tr td.font-bold", /73,94.\$US/
+      assert_select "main table tr td.font-bold", /32,59.€/
+      assert_select "main table tr td.font-bold", /38,39.€/
+      assert_select "main tfoot tr td.font-bold", /70,98.€/
     end
 
     def pirate_cart_assertions!
@@ -132,8 +132,8 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
       assert_select "table tfoot tr th", "Yer Total:"
       assert_select "button", "Scuttle Cart"
       assert_select "button", "Checkout! Arrr!"
-      assert_select "main table tr td.font-bold", "33.95 US pieces o'8"
-      assert_select "main table tr td.font-bold", "39.99 US pieces o'8"
-      assert_select "main tfoot tr td.font-bold", "73.94 US pieces o'8"
+      assert_select "main table tr td.font-bold", "271.60 pieces o'8"
+      assert_select "main table tr td.font-bold", "319.92 pieces o'8"
+      assert_select "main tfoot tr td.font-bold", "591.52 pieces o'8"
     end
 end

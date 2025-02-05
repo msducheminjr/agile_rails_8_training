@@ -24,7 +24,7 @@ pirate:
   number:
     currency:
       format:
-        unit: "US pieces o'8"
+        unit: "pieces o'8"
         precision: 2
         separator: "."
         delimiter: ","

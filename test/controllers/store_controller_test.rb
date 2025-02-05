@@ -115,7 +115,7 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
       assert_select "button", "Añadir al Carrito"
       assert_select "main ul li", 1
       # the non-breaking space isn't matching \s so using .
-      assert_select "div span.price", /[\.\d]+,\d\d.\$US/
+      assert_select "div span.price", /[\.\d]+,\d\d.€/
     end
 
     def pirate_store_assertions!
@@ -127,6 +127,6 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
       assert_select "nav a", "Hollar"
       assert_select "button", "Add to Booty"
       assert_select "main ul li", 1
-      assert_select "div span.price", /\A[,\d]+\.\d\d\sUS\spieces\so\'8\z/
+      assert_select "div span.price", /\A[,\d]+\.\d\d\spieces\so\'8\z/
     end
 end
