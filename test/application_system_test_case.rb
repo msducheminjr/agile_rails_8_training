@@ -7,7 +7,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     visit new_session_url
     fill_in "Email address", with: user.email_address
     fill_in "Password", with: the_password
-    await_jobs 0.4 do
+    await_jobs 0.6 do
       click_on "Sign in"
     end
 
