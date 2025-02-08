@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-sams:
+sams: &SAMS
   name: Sam Ruby
   address: |
     123 Fake St
@@ -8,6 +8,11 @@ sams:
     Durham, NH 03824
   email: sam@example.com
   pay_type: 1
+
+sams_older:
+  <<: *SAMS
+  pay_type: 2
+  created_at: <%= 2.days.ago %>
 
 daves:
   name: Dave Thomas
