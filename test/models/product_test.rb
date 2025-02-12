@@ -5,7 +5,7 @@ class ProductTest < ActiveSupport::TestCase
     @product = products(:pickaxe)
     @lorem = { io: File.open("test/fixtures/files/lorem.jpg"),
       filename: "lorem.jpg", content_type: "image/jpeg" }
-    @new_product = Product.new(title: "My Book Title", description: "yyy", price: 1)
+    @new_product = Product.new(title: "My Book Title", price: 1)
     @product_with_image = Product.new(title: "My Book Title", description: "zzz", price: 2)
     @product_with_image.image.attach(@lorem)
   end
@@ -43,10 +43,13 @@ class ProductTest < ActiveSupport::TestCase
 
   test "image url" do
     product = @new_product.dup
+    product.description.body = "yyy"
     product.image.attach(@lorem)
+
     assert product.valid?, "image/jpeg must be valid"
 
     product = @new_product.dup
+    product.description.body = "yyy"
     product.image.attach(io: File.open("test/fixtures/files/logo.svg"),
       filename: "lorem.jpg", content_type: "image/svg+xml")
     assert_not product.valid?, "image/svg+xml must be invalid"

@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   has_one_attached :image
+  has_rich_text :description
   has_many :line_items
   after_commit -> { broadcast_refresh_later_to "products" }
   before_destroy :ensure_not_referenced_by_any_line_item

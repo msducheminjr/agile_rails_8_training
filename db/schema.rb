@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_11_215816) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_12_044102) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_11_215816) do
 
   create_table "products", force: :cascade do |t|
     t.string "title"
-    t.text "description"
+    t.text "description_before_action_text"
     t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
