@@ -43,7 +43,7 @@ class OrdersEnglishTest < ApplicationSystemTestCase
 
   test "check order and delivery" do
     LineItem.delete_all
-    Order.delete_all
+    Order.destroy_all
 
     visit store_index_url
 

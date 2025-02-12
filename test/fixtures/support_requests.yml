@@ -4,8 +4,14 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+daves:
+  email: dave@example.com
+  subject: Empty box
+  body: My order arrived with an empty box and no books!
+  order: daves
+
+# has a rich text response
+steves:
+  email: stevethepirate@example.com
+  subject: What be US pieces o eight?
+  body: Matey, what be the exchange rate between normal pieces o eight and US? Gyaaaar!

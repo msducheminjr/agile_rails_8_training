@@ -1,0 +1,9 @@
+# Support Requests
+steves_response:
+  record: steves (SupportRequest)
+  name: response
+  body: >-
+    <div><p>Hi Steve,</p><p>Thanks for reaching out to us. It turns out that US
+    pieces o' 8 is just US dollars. If you are treating pieces o' 8 as one eighth of
+    a dollar, then you would multiply by 8 to get your price.</p><p>Sincerely,</p>
+    <p>The Pragmatic Bookshelf</p></div>

@@ -1,18 +1,18 @@
 require "test_helper"
+require "./test/concerns/requires_authentication"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+  include RequiresAuthentication
   setup do
     @product = products(:pickaxe)
     @title = "Stateless Coding"
     @image_file = fixture_file_upload("stateless_logo_256.png", "image/png")
-    login_as users(:one)
+    @user = users(:one)
+    login_as @user
   end
 
-  test "should not allowed access for public" do
-    # logout
-    assert_difference("Session.count", -1) do
-      delete session_url
-    end
+  test "should not allow access for public" do
+    ensure_logged_out! @user
 
     # try the different product routes and ensure no access
     # index
@@ -146,10 +146,5 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       assert_select "form div label", "Description"
       assert_select "form div label", "Image"
       assert_select "form div label", "Price"
-    end
-
-    def no_access_assertions!
-      assert_redirected_to new_session_url
-      assert_equal "You must login first.", flash[:notice]
     end
 end

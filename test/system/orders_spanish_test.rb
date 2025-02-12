@@ -39,7 +39,7 @@ class OrdersSpanishTest < ApplicationSystemTestCase
 
   test "credit card order and delivery in Spanish" do
     LineItem.delete_all
-    Order.delete_all
+    Order.destroy_all
 
     visit store_index_url(locale: "es")
 
