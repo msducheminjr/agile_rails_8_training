@@ -45,7 +45,7 @@
                       class: "depot_form") do |form| %>
           <div class="field">
             <%= form.label :response, "Write Response" %>
-            <%= form.rich_text_area :response, id: :support_request_response %>
+            <%= form.rich_textarea :response, id: :support_request_response %>
           </div>
           <div class="actions">
             <%= form.submit "Send Response" %>
