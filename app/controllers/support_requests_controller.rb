@@ -1,6 +1,7 @@
 class SupportRequestsController < ApplicationController
   def index
-    @support_requests = SupportRequest.all
+    @support_requests =
+        SupportRequest.with_all_rich_text.includes(orders: [ line_items: :product ])
   end
 
   def update

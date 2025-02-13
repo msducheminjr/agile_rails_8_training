@@ -2,7 +2,8 @@ require "pago"
 
 class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
-  has_many :support_requests, dependent: :nullify
+  has_and_belongs_to_many :support_requests
+  before_create :ensure_support_requests
 
   enum :pay_type, {
     "Check"           => 0,
@@ -53,4 +54,9 @@ class Order < ApplicationRecord
     end
     payment_result
   end
+
+  private
+    def ensure_support_requests
+      self.support_requests = SupportRequest.where(email: self.email)
+    end
 end

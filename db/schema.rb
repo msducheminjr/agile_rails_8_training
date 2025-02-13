@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_12_044102) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_12_054920) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -86,6 +86,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_044102) do
     t.date "ship_date"
   end
 
+  create_table "orders_support_requests", id: false, force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "support_request_id", null: false
+    t.index ["order_id"], name: "index_orders_support_requests_on_order_id"
+    t.index ["support_request_id", "order_id"], name: "idx_on_support_request_id_order_id_b9d63e2dbf", unique: true
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.text "description_before_action_text"
@@ -107,10 +114,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_044102) do
     t.string "email"
     t.string "subject"
     t.text "body"
-    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_support_requests_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,5 +133,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_044102) do
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "sessions", "users"
-  add_foreign_key "support_requests", "orders"
 end

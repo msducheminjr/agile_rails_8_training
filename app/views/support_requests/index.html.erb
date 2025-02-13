@@ -9,25 +9,26 @@
         <h2 class="font-bold"><%= support_request.subject %></h2>
         <%= support_request.body %>
       </blockquote>
-      <% if support_request.order %>
-        <h3 class="mt-4 text-xl font-bold">Recent Order</h3>
+      <% if support_request.orders.length > 0 %>
+        <% support_request.orders.order(created_at: :desc).each do |order| %>
+        <h3 class="mt-4 text-xl font-bold">Recent <%= "Order".pluralize(support_request.orders.length) %></h3>
         <dl>
           <dt>Name</dt>
-          <dd class="ml-4"><%= support_request.order.name %></dd>
+          <dd class="ml-4"><%= order.name %></dd>
 
           <dt>Email</dt>
-          <dd  class="ml-4"><%= support_request.order.email %></dd>
+          <dd  class="ml-4"><%= order.email %></dd>
 
           <dt>Address</dt>
-          <dd class="ml-4"><%= support_request.order.address %></dd>
+          <dd class="ml-4"><%= order.address %></dd>
 
           <dt>PayType</dt>
-          <dd class="ml-4"><%= support_request.order.pay_type %></dd>
+          <dd class="ml-4"><%= order.pay_type %></dd>
 
           <dt>Line Items</dt>
           <dd>
             <ul class="ml-4 list-disc">
-              <% support_request.order.line_items.each do |line_item| %>
+              <% order.line_items.each do |line_item| %>
                 <li>
                   <%= line_item.product.title %>
                   (<%= line_item.product.price %>)
@@ -36,8 +37,9 @@
             </ul>
           </dd>
         </dl>
+        <% end %>
       <% else %>
-        <h3 class="notice">No associated order</h3>
+        <h3 class="notice">No associated orders</h3>
       <% end %>
       <% if support_request.response.blank? %>
         <%= form_with(model: support_request,

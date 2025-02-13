@@ -53,6 +53,7 @@
           <li><%= link_to 'Orders', orders_path(locale: I18n.locale) %></li>
           <li><%= link_to 'Products', products_path(locale: I18n.locale) %></li>
           <li><%= link_to 'Users', users_path(locale: I18n.locale) %></li>
+          <li><%= link_to 'Support Requests', support_requests_path(locale: I18n.locale) %></li>
           <li><%= button_to 'Logout', session_path(locale: I18n.locale), method: :delete %></li>
         <% else %>
           <li><%= link_to 'Login', new_session_path(locale: I18n.locale) %></li>

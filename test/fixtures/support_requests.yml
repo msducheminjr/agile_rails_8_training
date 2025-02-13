@@ -8,7 +8,7 @@ daves:
   email: dave@example.com
   subject: Empty box
   body: My order arrived with an empty box and no books!
-  order: daves
+  orders: [ daves ]
 
 # has a rich text response
 steves:
